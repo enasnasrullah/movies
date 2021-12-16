@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mt-2 text-center">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          type="text"
+          pInputText
+          placeholder="search"
+          [(ngModel)]="searchValue"
+          (change)="searchChanged()"
+        />
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3" *ngFor="let movie of movies">
+      <app-movie-item [itemData]="movie"></app-movie-item>
+    </div>
+  </div>
+  <div>
+    <p-paginator
+      [rows]="20"
+      [totalRecords]="10000"
+      (onPageChange)="paginate($event)"
+    ></p-paginator>
+  </div>
+</div>

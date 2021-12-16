@@ -1,0 +1,8 @@
+<div class="container">
+  <h2 class="text-center text-white h1 p-2">{{ title }}</h2>
+  <div class="row">
+    <div class="col-md-3" *ngFor="let item of items">
+      <app-movie-item [itemData]="item"></app-movie-item>
+    </div>
+  </div>
+</div>

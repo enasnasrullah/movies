@@ -1,0 +1,106 @@
+<ng-container *ngIf="movie">
+  <app-slider [items]="[movie]" [isBanner]="true"></app-slider>
+  <p-tabView>
+    <p-tabPanel header="OverView">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <img
+              [src]="
+                'https://image.tmdb.org/t/p/original/' + movie.backdrop_path
+              "
+              [alt]="movie.title"
+              class="poster"
+            />
+          </div>
+          <div class="col-md-8">
+            <h2>OverView</h2>
+            <p class="overview">{{ movie.overview }}</p>
+            <div class="d-flex">
+              <p>OriginL Title :</p>
+              <p class="text-warning">
+                {{ movie.original_title }}
+              </p>
+            </div>
+            <div class="d-flex">
+              <p>Language :</p>
+              <p class="text-warning">
+                {{ movie.original_language | uppercase }}
+              </p>
+            </div>
+            <div class="d-flex">
+              <p>popularity :</p>
+              <p class="text-warning">
+                {{ movie.popularity }}
+              </p>
+            </div>
+            <div class="d-flex">
+              <p>Revenue:</p>
+              <p class="text-warning">
+                {{ movie.revenue }}
+              </p>
+            </div>
+            <div class="d-flex">
+              <p>Release Date :</p>
+              <p class="text-warning">
+                {{ movie.release_date }}
+              </p>
+            </div>
+            <div class="d-flex">
+              <p>Vote Count:</p>
+              <p class="text-warning">
+                {{ movie.vote_count }}
+              </p>
+            </div>
+            <div class="d-flex">
+              <p>Vote Average :</p>
+              <p class="text-warning">
+                {{ movie.vote_average }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Videos">
+      <div class="row">
+        <ng-container *ngFor="let movieVideo of movieVideos">
+          <div class="col-md-4">
+            <video-embed
+              [key]="movieVideo.key"
+              [site]="movieVideo.site"
+            ></video-embed>
+          </div>
+        </ng-container>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Photos">
+      <div class="row">
+        <ng-container *ngFor="let movieImage of movieImages?.backdrops">
+          <div class="col-md-4">
+            <p-image
+              [src]="
+                'https://image.tmdb.org/t/p/original/' + movieImage.file_path
+              "
+              width="100%"
+              alt="Image"
+              [preview]="true"
+            ></p-image>
+          </div>
+        </ng-container>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+  <p-carousel [numVisible]="5" *ngIf="movieCredits" [value]="movieCredits.cast">
+    <ng-template let-actor pTemplate="item">
+      <div class="actor">
+        <img
+          [src]="'https://image.tmdb.org/t/p/w342' + actor.profile_path"
+          alt=""
+          class="w-100 p-1"
+        />
+        <div class="text-white h5 text-center">{{ actor.name }}</div>
+      </div>
+    </ng-template>
+  </p-carousel>
+</ng-container>
